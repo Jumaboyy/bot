@@ -22,19 +22,38 @@
 # Bot bgtga yuborilgan rasmni guruhga yuborsin.
 # Bot botoa yuborilgan videoni guruhga yuborsin.
 # Bot botga yuborilgan animatsjvani guruhga yuborsin.
-# Botni GitHub ga yuklang. GitHubdagi bot linkini uyga vazifa faylini eng \J J	\J	A*VVVVVVVVVV J \J	J	\J
-# tepasiga Ctrl + V.
+# Botni GitHub ga yuklang. GitHubdagi bot linkini uyga vazifa faylini eng tepasiga Ctrl + V.
 
 from telebot import TeleBot
-
+from telebot.types import Message
 bot=TeleBot('6895478934:AAGPYudmqSBbcNHmJcuyqz_7fMZ9UvlKvGk')
 
+@bot.message_handler(commands=['start'])
 
+def start_bot(message:Message):
+    message_id=message.chat.id
+    test_name=message.from_user.full_name
+    print(message_id)
+    bot.send_message(message_id, f"Assalomu alaukum {test_name}  ")
 
+@bot.message_handler(content_types=["text"])
 
+def message_bot(message: Message):
+    message_id=message.chat.id
+    bot.copy_message(-4101184442, message_id, message.message_id)
 
+@bot.message_handler(content_types=["photo"])
 
+def message_bot(message: Message):
+    message_id=message.chat.id
+    bot.copy_message(-4101184442, message_id, message.message_id)
 
+@bot.message_handler(content_types=["animation"])
+def animatsiya(message:Message):
+    animatsiya_id=message.chat.id
+    bot.copy_message(-4101184442,animatsiya_id,message.message_id)
+
+bot.polling()
 
 
 
